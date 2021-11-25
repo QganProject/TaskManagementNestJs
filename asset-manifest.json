@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "https://Qganproject.github.io/TaskManagementNestJs\n/static/css/main.887583d8.chunk.css",
+    "main.js": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/main.a911add6.chunk.js",
+    "main.js.map": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/main.a911add6.chunk.js.map",
+    "runtime-main.js": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/runtime-main.bf312436.js",
+    "runtime-main.js.map": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/runtime-main.bf312436.js.map",
+    "static/js/2.e0d6cb9a.chunk.js": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/2.e0d6cb9a.chunk.js",
+    "static/js/2.e0d6cb9a.chunk.js.map": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/2.e0d6cb9a.chunk.js.map",
+    "index.html": "https://Qganproject.github.io/TaskManagementNestJs\n/index.html",
+    "static/css/main.887583d8.chunk.css.map": "https://Qganproject.github.io/TaskManagementNestJs\n/static/css/main.887583d8.chunk.css.map",
+    "static/js/2.e0d6cb9a.chunk.js.LICENSE.txt": "https://Qganproject.github.io/TaskManagementNestJs\n/static/js/2.e0d6cb9a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bf312436.js",
+    "static/js/2.e0d6cb9a.chunk.js",
+    "static/css/main.887583d8.chunk.css",
+    "static/js/main.a911add6.chunk.js"
+  ]
+}
