@@ -1,7 +1,12 @@
 .fullscreen-wrapper {
   width: 100vw;
   height: 100vh;
+  background-image: url("background/Background.JPG");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ffffff;
 }

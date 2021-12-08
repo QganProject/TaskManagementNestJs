@@ -1,33 +1,55 @@
-import React, { Component } from 'react';
-import { TextField, FormControl, Button } from '@material-ui/core';
-import styled from 'styled-components';
-import { inject } from 'mobx-react';
-import ErrorMessage from '../../components/ErrorMessage';
-
-const FormWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import React, { Component } from "react";
+import { TextField, FormControl, Button } from "@material-ui/core";
+import styled from "styled-components";
+import { inject } from "mobx-react";
+import ErrorMessage from "../../components/ErrorMessage";
+import "./CreateTaskPage.scss";
+import logo from "./background/Logo.png";
 
 const FormContainer = styled.div`
   max-width: 480px;
   width: 100%;
-  background-color: #edf4ff;
+  background-color: #fcecdd;
   padding: 30px;
-  border-radius: 5px;
+  border-radius: 20px;
 `;
 
-@inject('tasksStore', 'routerStore')
+const Logo = styled.div`
+  max-width: 480px;
+  width: 220px;
+  border-radius: 5px;
+  position: absolute;
+  margin-bottom: 690px;
+  margin-right: 460px;
+`;
+
+const ButtonContainer = styled.div`
+  background-color: #fcecdd;
+  position: absolute;
+  margin-top: 430px;
+`;
+
+const Heading = styled.h1`
+padding: 0px
+border-radius: 15px 15px 0px 0px;
+background-color: #ff6701;
+width: 542px;
+height: 60px;
+position: absolute;
+margin-bottom: 465px;
+margin-left: 2px;
+text-align: Center
+color: white;
+`;
+
+@inject("tasksStore", "routerStore")
 class CreateTaskPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       errorMessage: null,
     };
   }
@@ -38,7 +60,7 @@ class CreateTaskPage extends Component {
 
     try {
       await tasksStore.createTask(title, description);
-      window.location.hash = '/tasks';
+      window.location.hash = "/tasks";
     } catch (error) {
       const errorMessage = error.response.data.message;
       this.setState({ errorMessage });
@@ -47,12 +69,17 @@ class CreateTaskPage extends Component {
 
   render() {
     return (
-      <FormWrapper>
+      <div className="FormWrapper">
+        <Logo>
+          <img src={logo} alt="Logo" width="700px" height="700px" />
+        </Logo>
+        <Heading>New Task</Heading>
         <FormContainer>
-          <h1>Create a new task</h1>
           <p>Provide information about the task you wish to complete.</p>
 
-          { this.state.errorMessage && <ErrorMessage message={this.state.errorMessage} />}
+          {this.state.errorMessage && (
+            <ErrorMessage message={this.state.errorMessage} />
+          )}
 
           <FormControl fullWidth>
             <TextField
@@ -60,7 +87,7 @@ class CreateTaskPage extends Component {
               placeholder="Title"
               margin="normal"
               variant="outlined"
-              onChange={e => this.setState({ title: e.target.value })}
+              onChange={(e) => this.setState({ title: e.target.value })}
             />
           </FormControl>
           <FormControl fullWidth>
@@ -71,21 +98,22 @@ class CreateTaskPage extends Component {
               rows="8"
               margin="normal"
               variant="outlined"
-              onChange={e => this.setState({ description: e.target.value })}
+              onChange={(e) => this.setState({ description: e.target.value })}
             />
           </FormControl>
-
+        </FormContainer>
+        <ButtonContainer>
           <Button
-            style={{ marginTop: '10px' }}
+            style={{ marginTop: "10px" }}
             fullWidth
             variant="contained"
-            color="primary"
+            color="orange"
             onClick={this.handleSubmitTask}
           >
             CREATE TASK
           </Button>
-        </FormContainer>
-      </FormWrapper>
+        </ButtonContainer>
+      </div>
     );
   }
 }

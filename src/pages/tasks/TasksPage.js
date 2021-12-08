@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { Fab, IconButton } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import SignOutIcon from '@material-ui/icons/ExitToApp'
-import styled from 'styled-components';
-import Task from '../../components/Task';
-import TasksFilters from '../../components/TasksFilters';
+import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
+import { Fab, IconButton } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import SignOutIcon from "@material-ui/icons/ExitToApp";
+import styled from "styled-components";
+import Task from "../../components/Task";
+import TasksFilters from "../../components/TasksFilters";
 
 const TasksWrapper = styled.div`
   width: 100%;
@@ -23,7 +23,8 @@ const TasksHeader = styled.div`
 
 const Title = styled.h1`
   width: 100%;
-  color: #edf4ff;
+  color: #333333;
+  text-align: center;
 `;
 
 const CreateButtonContainer = styled.div`
@@ -31,6 +32,8 @@ const CreateButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  color: #fcecdd;
+  fill: #fcecdd;
 `;
 
 const TasksContainer = styled.div`
@@ -38,41 +41,45 @@ const TasksContainer = styled.div`
 `;
 
 const EmptyTasksPlaceholder = styled.p`
-  color: #edf4ff;
+  color: #333333;
   text-align: center;
   font-size: 22px;
 `;
 
 const SignOutIconContainer = styled.div`
   margin-left: 10px;
-  
+
   .signOutIcon {
-    fill: #edf4ff;
+    fill: #333333;
   }
 `;
 
-@inject('tasksStore', 'routerStore', 'userStore')
+@inject("tasksStore", "routerStore", "userStore")
 @observer
 class TasksPage extends Component {
   componentDidMount() {
     this.props.tasksStore.fetchTasks();
   }
-  
+
   handleSignOut = () => {
     const { userStore, tasksStore } = this.props;
     userStore.signout();
     tasksStore.resetTasks();
-    window.location.hash = '/signin';
+    window.location.hash = "/signin";
   };
 
   renderTasks = () => {
     const { tasksStore } = this.props;
 
     if (!tasksStore.tasks.length) {
-      return <EmptyTasksPlaceholder>No tasks available. Create one?</EmptyTasksPlaceholder>
+      return (
+        <EmptyTasksPlaceholder>
+          No tasks available. Create one?
+        </EmptyTasksPlaceholder>
+      );
     }
 
-    return tasksStore.tasks.map(task => (
+    return tasksStore.tasks.map((task) => (
       <Task
         key={task.id}
         id={task.id}
@@ -87,12 +94,14 @@ class TasksPage extends Component {
     return (
       <TasksWrapper>
         <TasksHeader>
-          <Title>Get things done.</Title>
+          <Title>Tasks</Title>
 
           <CreateButtonContainer>
             <Fab
               variant="extended"
-              onClick={() => { window.location.hash = '/tasks/create'; }}
+              onClick={() => {
+                window.location.hash = "/tasks/create";
+              }}
             >
               <AddIcon />
               Create Task
@@ -108,9 +117,7 @@ class TasksPage extends Component {
 
         <TasksFilters />
 
-        <TasksContainer>
-          {this.renderTasks()}
-        </TasksContainer>
+        <TasksContainer>{this.renderTasks()}</TasksContainer>
       </TasksWrapper>
     );
   }

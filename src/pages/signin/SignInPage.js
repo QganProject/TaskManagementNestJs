@@ -1,34 +1,50 @@
-import React, { Component } from 'react';
-import { Button, TextField } from '@material-ui/core';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import { Button, TextField } from "@material-ui/core";
+import styled from "styled-components";
 
-import './SignInPage.scss';
-import { inject } from 'mobx-react';
-import ErrorMessage from '../../components/ErrorMessage';
-
-const Heading = styled.h1`
-  margin-top: 0;
-`;
+import "./SignInPage.scss";
+import logo from "./background/Heading.png";
+import { inject } from "mobx-react";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const FormContainer = styled.div`
   max-width: 480px;
   width: 100%;
-  background-color: #edf4ff;
-  padding: 30px;
+  background-color: #fcecdd;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  padding-right: 3px;
   border-radius: 5px;
+  position: absolute;
+`;
+
+const Logo = styled.div`
+  max-width: 480px;
+  width: 220px;
+  border-radius: 5px;
+  position: absolute;
+  margin-bottom: 450px;
+  margin-right: 290px;
+`;
+
+const ButtonContainer = styled.div`
+  background-color: #fcecdd;
+  position: absolute;
+  margin-top: 290px;
 `;
 
 const FormField = styled(TextField)`
-  width: 100%;
+  width: 50%;
 `;
 
-@inject('userStore', 'routerStore')
+@inject("userStore", "routerStore")
 class SignInPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       errorMesssage: null,
     };
   }
@@ -39,7 +55,7 @@ class SignInPage extends Component {
 
     try {
       await this.props.userStore.signin(username, password);
-      window.location.hash = '/tasks';
+      window.location.hash = "/tasks";
     } catch (error) {
       const errorMessage = error.response.data.message;
       this.setState({ errorMessage });
@@ -47,56 +63,65 @@ class SignInPage extends Component {
   };
 
   goToSignUp = () => {
-    window.location.hash = '/signup';
+    window.location.hash = "/signup";
   };
 
   render() {
     const { errorMessage } = this.state;
-
     return (
       <div className="fullscreen-wrapper">
-        <FormContainer>
-          <Heading>Hello!</Heading>
-          <p>Fill in your username and password to sign in.</p>
-          
-          {errorMessage && <ErrorMessage message={this.state.errorMessage} />}
+        <Logo>
+          <img src={logo} alt="Logo" width="510px" height="200px" />
+        </Logo>
 
+        <FormContainer>
+          {errorMessage && <ErrorMessage message={this.state.errorMessage} />}
           <div>
             <FormField
+              style={{ marginLeft: "110px", marginRight: "110px" }}
               id="outlined-name"
               label="Username"
               margin="dense"
               variant="outlined"
-              onChange={e => this.setState({ username: e.target.value })}
+              onChange={(e) => this.setState({ username: e.target.value })}
             />
           </div>
           <div>
             <FormField
+              style={{
+                marginLeft: "110px",
+                marginRight: "110px",
+                marginBottom: "20px",
+              }}
               id="outlined-name"
               label="Password"
               margin="dense"
               variant="outlined"
               type="password"
-              onChange={e => this.setState({ password: e.target.value })}
+              onChange={(e) => this.setState({ password: e.target.value })}
             />
           </div>
-          <hr/>
-          <div>
-            <Button
-              style={{ marginBottom: '10px' }}
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={this.submit}
-            >
-              SIGN IN
-            </Button>
 
+          <div>
             <Button fullWidth onClick={this.goToSignUp}>
               Don't have an account? Sign up now!
             </Button>
           </div>
         </FormContainer>
+        <ButtonContainer>
+          <Button
+            style={{
+              paddingLeft: "40px",
+              paddingRight: "40px",
+            }}
+            fullWidth
+            variant="contained"
+            color="#FCECDD"
+            onClick={this.submit}
+          >
+            SIGN IN
+          </Button>
+        </ButtonContainer>
       </div>
     );
   }
