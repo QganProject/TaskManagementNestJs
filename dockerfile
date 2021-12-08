@@ -7,6 +7,7 @@ RUN cd /app \
 && yarn install 
 COPY . .
 RUN yarn build
+CMD ["yarn", "start"]
 
 #webserver
 FROM fholzer/nginx-brotli:v1.12.2
