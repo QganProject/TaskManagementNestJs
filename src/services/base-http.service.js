@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class BaseHttpService {
-  BASE_URL = process.env.REACT_APP_BASE_URL || "http://35.188.22.152:3000";
+  BASE_URL = process.env.REACT_APP_BASE_URL || "http://104.197.215.178:3000";
   _accessToken = null;
 
   constructor(routerStore) {
